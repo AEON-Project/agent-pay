@@ -482,7 +482,7 @@ export async function initSignClient(projectId) {
  */
 export async function connectWallet(signClient, statusPort, amount = null, token = "USDT", gasAmount = null) {
   const { uri, approval } = await signClient.connect({
-    optionalNamespaces: {
+    requiredNamespaces: {
       eip155: {
         methods: ["eth_sendTransaction"],
         chains: [BSC_CHAIN_ID],
