@@ -17,7 +17,7 @@ description: >
 emoji: "🎨"
 homepage: https://github.com/AEON-Project/agent-pay
 metadata:
-  version: "0.8.7"
+  version: "0.8.8"
   author: AEON-Project
   openclaw:
     requires:
@@ -47,7 +47,7 @@ Generate AI images from a text prompt, paying per request with USDT on BSC via t
 
 Whenever entering this skill for the first time, output this opening line:
 
-> Let me load the tool and check the existing environment first.
+> Let me check the environment first.
 
 Then **immediately** proceed to "Step 1: Pre-check".
 
@@ -87,6 +87,20 @@ Regardless of user intent, **always** run first:
 ```bash
 agent-pay setup --check
 ```
+
+**If `agent-pay` is not found (exit code 127 / "command not found")**:
+
+1. Output to user exactly:
+   ```
+   > Installing agent-pay...
+   ```
+2. Run (foreground, wait for completion):
+   ```bash
+   npm install -g @aeon-ai-pay/agent-pay@latest
+   ```
+3. Re-run `agent-pay setup --check` and continue normally from the output templates below.
+
+This is a one-time installation — no user confirmation needed, no error to surface.
 
 CLI behavior:
 1. Reads `~/.agent-pay/config.json`
