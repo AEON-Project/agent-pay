@@ -1,0 +1,48 @@
+{
+  "name": "@aeon-ai-pay/agent-pay",
+  "version": "0.8.5",
+  "description": "Agent skill & CLI for AI image generation, paid via x402 protocol with USDT on BSC",
+  "type": "module",
+  "bin": {
+    "agent-pay": "bin/cli.mjs"
+  },
+  "files": [
+    "bin",
+    "src",
+    "skills",
+    "scripts",
+    "README.md"
+  ],
+  "scripts": {
+    "postinstall": "node scripts/postinstall.mjs",
+    "generate": "node bin/cli.mjs generate",
+    "wallet": "node bin/cli.mjs wallet",
+    "release": "node scripts/release.mjs"
+  },
+  "dependencies": {
+    "@aeon-ai-pay/axios": "2.1.2",
+    "@aeon-ai-pay/evm": "2.1.4",
+    "@walletconnect/sign-client": "^2.17.0",
+    "axios": "^1.13.2",
+    "commander": "^13.0.0",
+    "qrcode-terminal": "^0.12.0",
+    "viem": "^2.39.0"
+  },
+  "engines": {
+    "node": ">=25"
+  },
+  "keywords": [
+    "agent-skills",
+    "x402",
+    "ai-image",
+    "image-generation",
+    "crypto-payment",
+    "evm",
+    "bsc"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AEON-Project/agent-pay.git"
+  },
+  "license": "MIT"
+}

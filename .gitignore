@@ -1,0 +1,9 @@
+node_modules/
+.env
+.env.*
+*.log
+.idea/
+.DS_Store
+*.tgz
+package-lock.json
+.claude/settings.local.json

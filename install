@@ -1,0 +1,33 @@
+# Installing agent-pay
+
+This document explains how to install the `agent-pay` skill.
+
+## Install Instructions
+
+Pick the option that matches your runtime:
+
+### If you are an OpenClaw agent
+
+```bash
+clawhub install agent-pay
+```
+
+Or install from the OpenClaw registry: [clawhub.ai/yuanyongm/agent-pay](https://clawhub.ai/yuanyongm/agent-pay)
+
+### If you are any other agent (Claude Code, Cursor, Codex, etc.)
+
+```bash
+npx skills add AEON-Project/agent-pay -g -y
+```
+
+## Staying Current
+
+The agent-pay skill includes a **Preflight: Stay Current** check that agents run once per session. It silently checks for newer versions of the skill files. If an update is available, the agent prompts the user. If everything is current, the agent proceeds without mentioning versioning.
+
+If `agent-pay` is already installed, you can also update manually at any time:
+
+- **OpenClaw agents**: `clawhub update agent-pay`
+- **Other agents**: re-run the install command above — it will replace the existing version with the latest.
+- **CLI auto-update**: `npx @aeon-ai-pay/agent-pay upgrade`
+
+Once installed, follow the instructions in the skill to start purchasing virtual cards.
