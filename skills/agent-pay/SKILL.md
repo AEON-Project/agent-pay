@@ -17,7 +17,7 @@ description: >
 emoji: "🎨"
 homepage: https://github.com/AEON-Project/agent-pay
 metadata:
-  version: "0.8.5"
+  version: "0.8.6"
   author: AEON-Project
   openclaw:
     requires:
@@ -218,31 +218,26 @@ The CLI automatically downloads every `data.images[].url`, then reads each file'
 }
 ```
 
-Display to the user with this exact box-drawing table (**copy must be verbatim**, variable substitution only):
+Display to the user as a **key-value list** (no fixed-width box, so long paths / tx hashes never overflow). Use this exact form (**verbatim**, variable substitution only):
 
 ```
-✅ 生成完成
+✅ Generated
 
-┌──────┬─────────────────────────────┐
-│ 路径 │ {localPath}                 │
-├──────┼─────────────────────────────┤
-│ 格式 │ {format}                    │
-├──────┼─────────────────────────────┤
-│ 尺寸 │ {width} × {height}          │
-├──────┼─────────────────────────────┤
-│ 大小 │ {sizeHuman}                 │
-├──────┼─────────────────────────────┤
-│ 交易 │ {transaction}               │
-└──────┴─────────────────────────────┘
+📁 Path        {localPath}
+🎨 Format      {format}
+📐 Dimensions  {width} × {height}
+💾 Size        {sizeHuman}
+🔗 Tx          {transaction}
 ```
 
-Use box-drawing characters `┌ ─ ┬ ┐ │ ├ ┼ ┤ └ ┴ ┘`. Adjust the right column width to fit the longest value (the example column width is illustrative — make it wide enough that no line wraps). Keep the leading `✅ 生成完成` on its own line, with one blank line before the table.
-
+Rules:
+- Title `✅ Generated` on its own line, then one blank line, then the 5 rows.
+- Each row: emoji + single space + label padded with spaces to the longest label width (`Dimensions` = 10 chars) + **two spaces** + value. This keeps values visually aligned in monospace fonts.
 - `{format}`: uppercase the CLI's lowercase value (e.g. `png` → `PNG`).
-- `{width} × {height}`: render with a `×` (U+00D7) and single spaces.
-- `{transaction}`: full on-chain tx hash (top-level `transaction`, not `paymentResponse.txHash`).
-- If multiple images were returned, render one table per image.
-- If a particular image failed to download, the entry has `error` instead of `localPath`/dimensions/size — replace the `路径` row with `│ 路径 │ 下载失败：{error}` and omit `格式/尺寸/大小` rows.
+- `{width} × {height}`: render with `×` (U+00D7) and single spaces around it.
+- `{transaction}`: full on-chain tx hash from the top-level `transaction` (not `paymentResponse.txHash`).
+- Multiple images: render one block per image, separated by a blank line.
+- Failed download: replace the whole block of that image with one line `❌ Download failed: {error} (source: {imageUrl})`.
 
 #### Case B: Funding Signature Timeout (5 minutes)
 
@@ -411,7 +406,7 @@ The following **key phrases** and **line-level output templates** must be **verb
 | Auto-create wallet | `Auto-creating your designated wallet...` |
 | Wallet ready | `0x0...{last4} Ready. Tell me what image you'd like to generate.` |
 | Generate image | `> Generating image...` |
-| Generation success header | `✅ 生成完成` (followed by blank line + box-drawing table; see Case A) |
+| Generation success header | `✅ Generated` (followed by blank line + 5-row key-value list; see Case A) |
 | Signature timeout | `Payment approval timed out. Please try again.` |
 | Signature rejected | `Payment approval was rejected. Please try again if you'd like to proceed.` |
 | Funding flow | `> Funding flow triggered...` |

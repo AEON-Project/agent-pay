@@ -90,32 +90,26 @@ Notes:
 
 ## User-Facing Display Template
 
-After parsing the JSON, render each image as a box-drawing table:
+After parsing the JSON, render each image as a **key-value list** (not a fixed-width box-drawing table — long paths / tx hashes used to overflow):
 
 ```
-✅ 生成完成
+✅ Generated
 
-┌──────┬─────────────────────────────┐
-│ 路径 │ {localPath}                 │
-├──────┼─────────────────────────────┤
-│ 格式 │ {FORMAT}                    │
-├──────┼─────────────────────────────┤
-│ 尺寸 │ {width} × {height}          │
-├──────┼─────────────────────────────┤
-│ 大小 │ {sizeHuman}                 │
-├──────┼─────────────────────────────┤
-│ 交易 │ {transaction}               │
-└──────┴─────────────────────────────┘
+📁 Path        {localPath}
+🎨 Format      {FORMAT}
+📐 Dimensions  {width} × {height}
+💾 Size        {sizeHuman}
+🔗 Tx          {transaction}
 ```
 
 Rules:
-- `✅ 生成完成` is verbatim (one line, then a blank line before the table).
-- Use box-drawing chars `┌ ─ ┬ ┐ │ ├ ┼ ┤ └ ┴ ┘`.
-- Right column must be wide enough that no value wraps.
+- `✅ Generated` verbatim, then one blank line, then 5 rows.
+- Each row: emoji + space + label padded to the longest label width (`Dimensions` = 10) + two spaces + value.
 - `{FORMAT}` = uppercase of `images[].format` (e.g. `png` → `PNG`).
 - `{width} × {height}` uses U+00D7 with single spaces around it.
-- `{transaction}` = full top-level tx hash.
-- One table per image when multiple images were returned.
+- `{transaction}` = full top-level tx hash (not `paymentResponse.txHash`).
+- Multiple images → one block per image, separated by a blank line.
+- Failed download → one line `❌ Download failed: {error} (source: {imageUrl})` instead of the 5-row block.
 
 ## Error Handling
 
@@ -127,7 +121,7 @@ Rules:
 | User rejected signature | `Payment approval was rejected. Please try again if you'd like to proceed.` | Relay; do not auto-retry |
 | Insufficient balance after funding | `Still insufficient USDT after funding.` | Relay |
 | Server network error | Error JSON | Suggest retry / check `serviceUrl` |
-| Image download failed | Entry has `error` instead of `localPath` | Show `│ 路径 │ 下载失败：{error}` and omit format/尺寸/大小 rows |
+| Image download failed | Entry has `error` instead of `localPath` | Show single line `❌ Download failed: {error} (source: {imageUrl})` instead of the 5-row block |
 
 ## Pricing Model
 
