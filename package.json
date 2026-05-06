@@ -44,5 +44,8 @@
     "type": "git",
     "url": "git+https://github.com/AEON-Project/agent-pay.git"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "license": "MIT"
 }
