@@ -17,14 +17,14 @@ description: >
 emoji: "🎨"
 homepage: https://github.com/AEON-Project/agent-pay
 metadata:
-  version: "0.8.6"
+  version: "0.8.7"
   author: AEON-Project
   openclaw:
     requires:
       bins:
         - node
         - npx
-    primaryEnv: X402_CARD_SERVICE_URL
+    primaryEnv: AGENT_PAY_SERVICE_URL
     user-invocable: true
     disable-model-invocation: false
 compatibility: Requires Node.js >= 18 and npm

@@ -22,7 +22,7 @@ const DEFAULT_MODEL = "replicate/black-forest-labs/flux-schnell";
 
 export async function generate(opts) {
   console.error("Generating image...");
-  const serviceUrl = resolve(opts.serviceUrl, "X402_CARD_SERVICE_URL", "serviceUrl");
+  const serviceUrl = resolve(opts.serviceUrl, "AGENT_PAY_SERVICE_URL", "serviceUrl");
   const privateKey = resolve(opts.privateKey, "EVM_PRIVATE_KEY", "privateKey");
   const { prompt } = opts;
   const aspectRatio = opts.aspectRatio || "16:9";

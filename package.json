@@ -1,6 +1,6 @@
 {
   "name": "@aeon-ai-pay/agent-pay",
-  "version": "0.8.6",
+  "version": "0.8.7",
   "description": "Agent skill & CLI for AI image generation, paid via x402 protocol with USDT on BSC",
   "type": "module",
   "bin": {
